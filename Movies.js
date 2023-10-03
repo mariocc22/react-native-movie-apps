@@ -13,6 +13,13 @@ import SearchResultScreen from "./screens/SearchResultScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MovieDetailsScreen from "./screens/MovieDetailsScreen";
+import TVShowDetailsScreen from "./screens/TVShowDetailsScreen";
+
+import { Animated } from "react-native";
+
+// ignore warnings of animated event
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Sending..."]);
 
 // top tabs navigator
 const TopTabs = () => {
@@ -76,6 +83,13 @@ const HomeStack = () => {
       <Stack.Screen
         name="MovieDetailsScreen"
         component={MovieDetailsScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="TVShowDetailsScreen"
+        component={TVShowDetailsScreen}
         options={{
           presentation: "modal",
         }}

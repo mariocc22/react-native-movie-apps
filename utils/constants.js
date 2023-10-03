@@ -6,6 +6,13 @@ export const data = [
   { key: "upcoming", value: "Upcoming" },
 ];
 
+export const dataTv = [
+  { key: "airing_today", value: "Airing Today" },
+  { key: "on_the_air", value: "On The Air" },
+  { key: "popular", value: "Popular" },
+  { key: "top_rated", value: "Top Rated" },
+];
+
 // API credentials
 const API_KEY = "a2e2ef2595c977b7be548a9e245f3aa8";
 const API_BASE_URL = "https://api.themoviedb.org/3";
@@ -29,3 +36,20 @@ export const searchEndpoint = `${API_BASE_URL}/search/movie?api_key=${API_KEY}`;
 // 6. movie details
 export const movieDetailsEndpoint = (id) =>
   `${API_BASE_URL}/movie/${id}?api_key=${API_KEY}`;
+
+// tv shows endpoints
+// 1. airing today
+export const airingTodayEndpoint = `${API_BASE_URL}/tv/airing_today?api_key=${API_KEY}`;
+
+// 2. on the air
+export const onTheAirEndpoint = `${API_BASE_URL}/tv/on_the_air?api_key=${API_KEY}`;
+
+// 3. popular
+export const popularTvEndpoint = `${API_BASE_URL}/tv/popular?api_key=${API_KEY}`;
+
+// 4. top rated
+export const topRatedTvEndpoint = `${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}`;
+
+// 5. tv show details
+export const tvShowDetailsEndpoint = (id) =>
+  `${API_BASE_URL}/tv/${id}?api_key=${API_KEY}`;

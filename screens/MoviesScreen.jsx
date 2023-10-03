@@ -8,13 +8,11 @@ import {
   SafeAreaView,
   FlatList,
   Image,
-  Pressable,
   TouchableOpacity,
 } from "react-native";
 
 // react navigation imports
 import { useNavigation } from "@react-navigation/native";
-import { SelectList } from "react-native-dropdown-select-list";
 
 // fetching movies
 import {
