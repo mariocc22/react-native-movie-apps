@@ -1,5 +1,6 @@
 import Movies from "./Movies";
-import "react-native-gesture-handler";
+import "./utils/debugging";
+
 export default function App() {
   return <Movies />;
 }

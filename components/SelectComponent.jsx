@@ -4,13 +4,7 @@ import { SelectList } from "react-native-dropdown-select-list";
 
 const SelectComponent = ({ defaultOption, placeholder, data, setSelected }) => {
   return (
-    <View
-      style={{
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        marginTop: 10,
-      }}
-    >
+    <View>
       <SelectList
         defaultOption={defaultOption}
         placeholder={placeholder}

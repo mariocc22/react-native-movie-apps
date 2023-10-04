@@ -14,6 +14,8 @@ import {
   popularTvEndpoint,
   topRatedTvEndpoint,
   tvShowDetailsEndpoint,
+  movieSearchEndpoint,
+  searchResultDetailsEndpoint,
 } from "./constants";
 
 // api call function (reusable)
@@ -77,6 +79,15 @@ export const fetchTopRatedTvShows = () => {
 
 export const fetchTvShowDetails = (tvshowId) => {
   return apiCall(tvShowDetailsEndpoint(tvshowId));
+};
+
+// search api calls
+export const searchMovies = (type, params) => {
+  return apiCall(movieSearchEndpoint(type), params);
+};
+
+export const fetchSearchResultDetails = (type, id) => {
+  return apiCall(searchResultDetailsEndpoint(type, id));
 };
 
 // functions for images

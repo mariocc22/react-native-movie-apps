@@ -13,6 +13,12 @@ export const dataTv = [
   { key: "top_rated", value: "Top Rated" },
 ];
 
+export const dataSearch = [
+  { key: "movie", value: "Movie" },
+  { key: "multi", value: "Multi" },
+  { key: "tv", value: "TV Show" },
+];
+
 // API credentials
 const API_KEY = "a2e2ef2595c977b7be548a9e245f3aa8";
 const API_BASE_URL = "https://api.themoviedb.org/3";
@@ -53,3 +59,12 @@ export const topRatedTvEndpoint = `${API_BASE_URL}/tv/top_rated?api_key=${API_KE
 // 5. tv show details
 export const tvShowDetailsEndpoint = (id) =>
   `${API_BASE_URL}/tv/${id}?api_key=${API_KEY}`;
+
+// search enpoints
+// 1. search by type
+export const movieSearchEndpoint = (type) =>
+  `${API_BASE_URL}/search/${type}?api_key=${API_KEY}`;
+
+// 2. search result details
+export const searchResultDetailsEndpoint = (type, id) =>
+  `${API_BASE_URL}/${type}/${id}?api_key=${API_KEY}`;

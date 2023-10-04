@@ -1,7 +1,9 @@
-import { useEffect } from "react";
-
 // react navigation imports
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // screens imports
@@ -15,11 +17,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MovieDetailsScreen from "./screens/MovieDetailsScreen";
 import TVShowDetailsScreen from "./screens/TVShowDetailsScreen";
 
-import { Animated } from "react-native";
-
-// ignore warnings of animated event
-import { LogBox } from "react-native";
-LogBox.ignoreLogs(["Sending..."]);
+import { useColorScheme } from "react-native";
+import SearchResultDetailsScreen from "./screens/SearchResultDetailsScreen";
 
 // top tabs navigator
 const TopTabs = () => {
@@ -94,13 +93,24 @@ const HomeStack = () => {
           presentation: "modal",
         }}
       />
+
+      <Stack.Screen
+        name="SearchResultDetailsScreen"
+        component={SearchResultDetailsScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const Movies = () => {
+  const currentTheme = useColorScheme();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={currentTheme === "dark" ? DarkTheme : DefaultTheme}
+    >
       <HomeStack />
     </NavigationContainer>
   );
