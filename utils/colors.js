@@ -3,4 +3,5 @@ export const themeColors = {
   secondary: "#08D9D6",
   tertiary: "#888888",
   complementary: "#FF2E63",
+  primary80: "#25243480",
 };

@@ -85,7 +85,17 @@ const HomeStack = () => {
         name="ContentDetailsScreen"
         component={ContentDetailsScreen}
         options={{
-          presentation: "modal",
+          presentation: "card",
+          headerShown: false,
+          headerTitle: "More Details",
+          headerTitleStyle: {
+            color: "white",
+            fontWeight: "bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: themeColors.complementary,
+          },
         }}
       />
     </Stack.Navigator>

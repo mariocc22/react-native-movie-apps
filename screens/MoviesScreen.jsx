@@ -16,6 +16,7 @@ import {
 import { data } from "../utils/constants";
 import SelectComponent from "../src/components/reusable/SelectComponent";
 import PreviewCard from "../src/components/card/PreviewCard";
+import Loader from "../src/components/reusable/Loader";
 
 const MoviesScreen = () => {
   const [selected, setSelected] = useState("");
