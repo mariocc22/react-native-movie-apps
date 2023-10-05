@@ -23,7 +23,7 @@ export const dataSearch = [
 ];
 
 // API credentials
-const API_KEY = "a2e2ef2595c977b7be548a9e245f3aa8";
+const API_KEY = "";
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
 // movies endpoints
