@@ -12,11 +12,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const SelectComponent = ({ defaultOption, placeholder, data, setSelected }) => {
   return (
-    <View
-      style={{
-        padding: 10,
-      }}
-    >
+    <View>
       <SelectList
         search={false}
         defaultOption={defaultOption}

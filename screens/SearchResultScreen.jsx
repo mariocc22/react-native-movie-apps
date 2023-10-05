@@ -11,22 +11,24 @@ import {
 // react imports
 import { useState } from "react";
 
-// rne imports
-import { SearchBar } from "@rneui/themed";
+// components
+import PreviewCard from "../src/components/card/PreviewCard";
 import SelectComponent from "../src/components/reusable/SelectComponent";
 
 // data
 import { dataSearch } from "../utils/constants";
 
-// fetching search results
-import { image185, searchMovies } from "../utils/helpers";
-import { useNavigation } from "@react-navigation/native";
+// helpers
+import { searchMovies } from "../utils/helpers";
+import SearchComponent from "../src/components/reusable/SearchComponent";
+
+// colors import
+import { themeColors } from "../utils/colors";
 
 const SearchResultScreen = () => {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const navigation = useNavigation();
 
   const fetchSearchResult = async (search, selected) => {
     let data = [];
@@ -50,132 +52,80 @@ const SearchResultScreen = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <Text
         style={{
-          paddingLeft: 30,
-          fontSize: 16,
-          fontFamily: "Verdana",
+          fontSize: 14,
           marginTop: 20,
+          paddingHorizontal: 20,
         }}
       >
         Search Movie/TV Show Name
-        <Text style={{ fontWeight: 600, color: "#BC3908" }}>*</Text>
+        <Text style={{ fontWeight: 600, color: themeColors.secondary }}>*</Text>
       </Text>
-      <SearchBar
-        ref={(search) => (this.search = search)}
-        containerStyle={{
-          backgroundColor: "white",
-          width: "100%",
-          paddingHorizontal: 30,
-          margin: "auto",
-          borderBlockColor: "white",
-        }}
-        inputContainerStyle={{
-          backgroundColor: "lightgray",
-          borderRadius: 10,
-        }}
-        inputStyle={{
-          fontFamily: "Verdana",
-          fontSize: 14,
-        }}
-        placeholderTextColor={"gray"}
-        placeholder="i.e. James Bond, CSI"
-        onChangeText={updateSearch}
-        value={search}
-      />
+      {/* search bar rne */}
+      <SearchComponent search={search} updateSearch={updateSearch} />
 
       {/* choose type */}
       <View
         style={{
           flexDirection: "column",
-          paddingHorizontal: 30,
-          marginTop: 20,
+          paddingHorizontal: 20,
+          marginTop: 10,
+          gap: 10,
         }}
       >
         <Text
           style={{
-            fontSize: 16,
-            fontFamily: "Verdana",
+            fontSize: 14,
           }}
         >
           Choose Search Type
-          <Text style={{ fontWeight: 600, color: "#BC3908" }}>*</Text>
+          <Text style={{ fontWeight: 600, color: themeColors.secondary }}>
+            *
+          </Text>
         </Text>
-        <View
+        <SelectComponent
+          defaultOption={{ key: "multi", value: "Multi" }}
+          placeholder={"Select a Category"}
+          data={dataSearch}
+          setSelected={setSelected}
+        />
+      </View>
+
+      {/* search button */}
+      <TouchableOpacity
+        style={{
+          backgroundColor: themeColors.complementary,
+          padding: 1,
+          borderRadius: 10,
+          marginTop: 20,
+          marginHorizontal: 20,
+        }}
+        onPress={() => {
+          fetchSearchResult(search, selected);
+          this.search.blur();
+        }}
+      >
+        <Text
           style={{
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
+            color: "white",
+            textAlign: "center",
+            fontSize: 16,
+            fontWeight: 600,
+            paddingVertical: 10,
           }}
         >
-          <SelectComponent
-            defaultOption={{ key: "multi", value: "Multi" }}
-            placeholder={"Select a Category"}
-            data={dataSearch}
-            setSelected={setSelected}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              fetchSearchResult(search, selected);
-              this.search.blur();
-            }}
-            style={{
-              backgroundColor: "#BC3908",
-              padding: 10,
-              borderRadius: 10,
-              marginLeft: 10,
-            }}
-          >
-            <Text style={{ color: "white" }}>Search</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+          Search
+        </Text>
+      </TouchableOpacity>
 
       {/* search results */}
       <FlatList
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 30, paddingHorizontal: 10 }}
         data={searchResult}
         keyExtractor={(item) => item?.id}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item?.title}</Text>
-            <Text>{item?.popularity}</Text>
-            <Text>{item?.release_date}</Text>
-            <Image
-              source={{ uri: image185(item?.poster_path) }}
-              width={150}
-              height={150}
-            />
-            <TouchableOpacity
-              style={{
-                width: 200,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
-              onPress={() =>
-                navigation.navigate("ContentDetailsScreen", {
-                  id: item?.id,
-                  type: selected === "multi" ? item?.media_type : selected,
-                })
-              }
-            >
-              <Text
-                style={{
-                  color: "blue",
-                  backgroundColor: "lightblue",
-                  padding: 15,
-                }}
-              >
-                View Details
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "black",
-              marginVertical: 10,
-            }}
+          <PreviewCard
+            type={selected === "multi" ? item?.media_type : selected}
+            item={item}
           />
         )}
       />

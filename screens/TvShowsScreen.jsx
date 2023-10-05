@@ -2,17 +2,7 @@
 import { useLayoutEffect, useState, useEffect } from "react";
 
 // react native imports
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-
-// react navigation imports
-import { useNavigation } from "@react-navigation/native";
+import { View, SafeAreaView, FlatList } from "react-native";
 
 // fetching movies
 import {
@@ -20,7 +10,6 @@ import {
   fetchOnTheAirTvShows,
   fetchPopularTvShows,
   fetchTopRatedTvShows,
-  image185,
 } from "../utils/helpers";
 
 // data for the select list
@@ -29,7 +18,6 @@ import SelectComponent from "../src/components/reusable/SelectComponent";
 import PreviewCard from "../src/components/card/PreviewCard";
 
 const TVShowsScreen = () => {
-  const navigation = useNavigation();
   const [selected, setSelected] = useState("");
   const [tvshows, setTvShows] = useState([]);
 
@@ -63,18 +51,20 @@ const TVShowsScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <SelectComponent
-        defaultOption={{ key: "popular", value: "Popular" }}
-        placeholder={"Select a Category"}
-        data={dataTv}
-        setSelected={setSelected}
-      />
-      <FlatList
-        style={{ padding: 10 }}
-        data={tvshows}
-        keyExtractor={(item) => item?.id}
-        renderItem={({ item }) => <PreviewCard type={"tv"} item={item} />}
-      />
+      <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
+        <SelectComponent
+          defaultOption={{ key: "popular", value: "Popular" }}
+          placeholder={"Select a Category"}
+          data={dataTv}
+          setSelected={setSelected}
+        />
+        <FlatList
+          style={{ marginTop: 20 }}
+          data={tvshows}
+          keyExtractor={(item) => item?.id}
+          renderItem={({ item }) => <PreviewCard type={"tv"} item={item} />}
+        />
+      </View>
     </SafeAreaView>
   );
 };

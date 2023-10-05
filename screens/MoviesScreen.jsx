@@ -2,7 +2,7 @@
 import { useLayoutEffect, useState, useEffect } from "react";
 
 // react native imports
-import { SafeAreaView, FlatList } from "react-native";
+import { SafeAreaView, FlatList, View } from "react-native";
 
 // fetching movies
 import {
@@ -51,18 +51,20 @@ const MoviesScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <SelectComponent
-        defaultOption={{ key: "popular", value: "Popular" }}
-        placeholder={"Select a Category"}
-        data={data}
-        setSelected={setSelected}
-      />
-      <FlatList
-        style={{ padding: 10 }}
-        data={movies}
-        keyExtractor={(item) => item?.id}
-        renderItem={({ item }) => <PreviewCard type={"movie"} item={item} />}
-      />
+      <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
+        <SelectComponent
+          defaultOption={{ key: "popular", value: "Popular" }}
+          placeholder={"Select a Category"}
+          data={data}
+          setSelected={setSelected}
+        />
+        <FlatList
+          style={{ marginTop: 20 }}
+          data={movies}
+          keyExtractor={(item) => item?.id}
+          renderItem={({ item }) => <PreviewCard type={"movie"} item={item} />}
+        />
+      </View>
     </SafeAreaView>
   );
 };
