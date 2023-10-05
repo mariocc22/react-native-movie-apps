@@ -8,14 +8,12 @@ import {
   topRatedEndpoint,
   upcomingEndpoint,
   searchEndpoint,
-  movieDetailsEndpoint,
   airingTodayEndpoint,
   onTheAirEndpoint,
   popularTvEndpoint,
   topRatedTvEndpoint,
-  tvShowDetailsEndpoint,
   movieSearchEndpoint,
-  searchResultDetailsEndpoint,
+  moreDetailsEndpoint,
 } from "./constants";
 
 // api call function (reusable)
@@ -56,10 +54,6 @@ export const fetchSearchMovies = (params) => {
   return apiCall(searchEndpoint, params);
 };
 
-export const fetchMovieDetails = async (movieId) => {
-  return apiCall(movieDetailsEndpoint(movieId));
-};
-
 // tv shows api calls
 export const fetchAiringTodayTvShows = () => {
   return apiCall(airingTodayEndpoint);
@@ -77,17 +71,14 @@ export const fetchTopRatedTvShows = () => {
   return apiCall(topRatedTvEndpoint);
 };
 
-export const fetchTvShowDetails = (tvshowId) => {
-  return apiCall(tvShowDetailsEndpoint(tvshowId));
-};
-
 // search api calls
 export const searchMovies = (type, params) => {
   return apiCall(movieSearchEndpoint(type), params);
 };
 
-export const fetchSearchResultDetails = (type, id) => {
-  return apiCall(searchResultDetailsEndpoint(type, id));
+// more details api calls
+export const fetchMoreDetails = (type, id) => {
+  return apiCall(moreDetailsEndpoint(type, id));
 };
 
 // functions for images

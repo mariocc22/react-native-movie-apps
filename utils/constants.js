@@ -1,3 +1,6 @@
+// import environment variables
+import { API_KEY_MOVIES } from "@env";
+
 // options for select component
 export const data = [
   { key: "now_playing", value: "Now Playing" },
@@ -39,10 +42,6 @@ export const upcomingEndpoint = `${API_BASE_URL}/movie/upcoming?api_key=${API_KE
 // 5. search
 export const searchEndpoint = `${API_BASE_URL}/search/movie?api_key=${API_KEY}`;
 
-// 6. movie details
-export const movieDetailsEndpoint = (id) =>
-  `${API_BASE_URL}/movie/${id}?api_key=${API_KEY}`;
-
 // tv shows endpoints
 // 1. airing today
 export const airingTodayEndpoint = `${API_BASE_URL}/tv/airing_today?api_key=${API_KEY}`;
@@ -56,15 +55,11 @@ export const popularTvEndpoint = `${API_BASE_URL}/tv/popular?api_key=${API_KEY}`
 // 4. top rated
 export const topRatedTvEndpoint = `${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}`;
 
-// 5. tv show details
-export const tvShowDetailsEndpoint = (id) =>
-  `${API_BASE_URL}/tv/${id}?api_key=${API_KEY}`;
-
 // search enpoints
 // 1. search by type
 export const movieSearchEndpoint = (type) =>
   `${API_BASE_URL}/search/${type}?api_key=${API_KEY}`;
 
-// 2. search result details
-export const searchResultDetailsEndpoint = (type, id) =>
+// more details endpoint
+export const moreDetailsEndpoint = (type, id) =>
   `${API_BASE_URL}/${type}/${id}?api_key=${API_KEY}`;

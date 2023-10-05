@@ -3,16 +3,18 @@ import { useRoute } from "@react-navigation/native";
 import { View, Text, Image } from "react-native";
 
 // fetch movie details
-import { fetchTvShowDetails, image500 } from "../utils/helpers";
+import { fetchMoreDetails, image500 } from "../../utils/helpers";
 import { useState, useEffect } from "react";
 
-const TVShowDetailsScreen = () => {
+const ContentDetailsScreen = () => {
   const route = useRoute();
   const [movieDetails, setMovieDetails] = useState({});
-  const { id } = route.params;
+  const { id, type } = route.params;
+
+  console.log("this is the route params", route.params);
 
   const getMovieDetails = async () => {
-    const data = await fetchTvShowDetails(id);
+    const data = await fetchMoreDetails(type, id);
     setMovieDetails(data);
   };
 
@@ -23,10 +25,10 @@ const TVShowDetailsScreen = () => {
 
   return (
     <View>
-      <Text>{movieDetails?.name}</Text>
+      <Text>{movieDetails?.title || movieDetails?.name}</Text>
       <Text>{movieDetails?.overview}</Text>
       <Text>{movieDetails?.popularity}</Text>
-      <Text>{movieDetails?.first_air_date}</Text>
+      <Text>{movieDetails?.release_date || movieDetails?.first_air_date}</Text>
       <Image
         source={{
           uri: image500(movieDetails?.poster_path),
@@ -38,4 +40,4 @@ const TVShowDetailsScreen = () => {
   );
 };
 
-export default TVShowDetailsScreen;
+export default ContentDetailsScreen;

@@ -3,7 +3,6 @@ import {
   View,
   Text,
   SafeAreaView,
-  StyleSheet,
   TouchableOpacity,
   FlatList,
   Image,
@@ -14,7 +13,7 @@ import { useState } from "react";
 
 // rne imports
 import { SearchBar } from "@rneui/themed";
-import SelectComponent from "../components/SelectComponent";
+import SelectComponent from "../src/components/reusable/SelectComponent";
 
 // data
 import { dataSearch } from "../utils/constants";
@@ -152,7 +151,7 @@ const SearchResultScreen = () => {
                 overflow: "hidden",
               }}
               onPress={() =>
-                navigation.navigate("SearchResultDetailsScreen", {
+                navigation.navigate("ContentDetailsScreen", {
                   id: item?.id,
                   type: selected === "multi" ? item?.media_type : selected,
                 })

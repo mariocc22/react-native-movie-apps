@@ -2,17 +2,7 @@
 import { useLayoutEffect, useState, useEffect } from "react";
 
 // react native imports
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-
-// react navigation imports
-import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView, FlatList } from "react-native";
 
 // fetching movies
 import {
@@ -20,15 +10,14 @@ import {
   fetchNowPlayingMovies,
   fetchPopularMovies,
   fetchUpcomingMovies,
-  image185,
 } from "../utils/helpers";
 
 // data for the select list
 import { data } from "../utils/constants";
-import SelectComponent from "../components/SelectComponent";
+import SelectComponent from "../src/components/reusable/SelectComponent";
+import PreviewCard from "../src/components/card/PreviewCard";
 
 const MoviesScreen = () => {
-  const navigation = useNavigation();
   const [selected, setSelected] = useState("");
   const [movies, setMovies] = useState([]);
 
@@ -61,60 +50,18 @@ const MoviesScreen = () => {
   }, [selected]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <SelectComponent
-        defaultOption={{ key: "popular", value: "popular" }}
+        defaultOption={{ key: "popular", value: "Popular" }}
         placeholder={"Select a Category"}
         data={data}
         setSelected={setSelected}
       />
       <FlatList
-        style={{ marginTop: 10 }}
+        style={{ padding: 10 }}
         data={movies}
         keyExtractor={(item) => item?.id}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item?.title}</Text>
-            <Text>{item?.popularity}</Text>
-            <Text>{item?.release_date}</Text>
-            <Image
-              source={{ uri: image185(item?.poster_path) }}
-              width={150}
-              height={150}
-            />
-            <TouchableOpacity
-              style={{
-                width: 200,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
-              onPress={() =>
-                navigation.navigate("MovieDetailsScreen", {
-                  id: item?.id,
-                })
-              }
-            >
-              <Text
-                style={{
-                  color: "blue",
-                  backgroundColor: "lightblue",
-                  padding: 15,
-                }}
-              >
-                View Details
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "black",
-              marginVertical: 10,
-            }}
-          />
-        )}
+        renderItem={({ item }) => <PreviewCard type={"movie"} item={item} />}
       />
     </SafeAreaView>
   );

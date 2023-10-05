@@ -25,7 +25,8 @@ import {
 
 // data for the select list
 import { dataTv } from "../utils/constants";
-import SelectComponent from "../components/SelectComponent";
+import SelectComponent from "../src/components/reusable/SelectComponent";
+import PreviewCard from "../src/components/card/PreviewCard";
 
 const TVShowsScreen = () => {
   const navigation = useNavigation();
@@ -61,60 +62,18 @@ const TVShowsScreen = () => {
   }, [selected]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <SelectComponent
-        defaultOption={{ key: "popular", value: "popular" }}
+        defaultOption={{ key: "popular", value: "Popular" }}
         placeholder={"Select a Category"}
         data={dataTv}
         setSelected={setSelected}
       />
       <FlatList
-        style={{ marginTop: 10 }}
+        style={{ padding: 10 }}
         data={tvshows}
         keyExtractor={(item) => item?.id}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item?.name}</Text>
-            <Text>{item?.popularity}</Text>
-            <Text>{item?.first_air_date}</Text>
-            <Image
-              source={{ uri: image185(item?.poster_path) }}
-              width={150}
-              height={150}
-            />
-            <TouchableOpacity
-              style={{
-                width: 200,
-                borderRadius: 10,
-                overflow: "hidden",
-              }}
-              onPress={() =>
-                navigation.navigate("TVShowDetailsScreen", {
-                  id: item?.id,
-                })
-              }
-            >
-              <Text
-                style={{
-                  color: "blue",
-                  backgroundColor: "lightblue",
-                  padding: 15,
-                }}
-              >
-                View Details
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: "black",
-              marginVertical: 10,
-            }}
-          />
-        )}
+        renderItem={({ item }) => <PreviewCard type={"tv"} item={item} />}
       />
     </SafeAreaView>
   );

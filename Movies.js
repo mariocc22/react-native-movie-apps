@@ -1,3 +1,9 @@
+// react imports
+import React from "react";
+
+// react native imports
+import { Text, View } from "react-native";
+
 // react navigation imports
 import {
   NavigationContainer,
@@ -5,20 +11,22 @@ import {
   DefaultTheme,
 } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // screens imports
 import MoviesScreen from "./screens/MoviesScreen";
 import TvShowsScreen from "./screens/TvShowsScreen";
 import SearchResultScreen from "./screens/SearchResultScreen";
+import ContentDetailsScreen from "./screens/details/ContentDetailsScreen";
 
-// icons imports
-import { Ionicons } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MovieDetailsScreen from "./screens/MovieDetailsScreen";
-import TVShowDetailsScreen from "./screens/TVShowDetailsScreen";
-
+// scheme imports
 import { useColorScheme } from "react-native";
-import SearchResultDetailsScreen from "./screens/SearchResultDetailsScreen";
+
+// colors imports
+import { themeColors } from "./utils/colors";
+
+// components imports
+import Header from "./src/components/header/Header";
 
 // top tabs navigator
 const TopTabs = () => {
@@ -28,15 +36,16 @@ const TopTabs = () => {
     <TopTab.Navigator
       screenOptions={{
         tabBarLabelStyle: {
-          textTransform: "capitalize",
+          fontSize: 14,
           fontWeight: "bold",
-          fontFamily: "Verdana",
+          color: themeColors.primary,
+          textTransform: "capitalize",
           height: 20,
         },
         tabBarIndicatorStyle: {
-          height: 5,
-          borderRadius: 5,
-          backgroundColor: "#BC3908",
+          height: 3,
+          borderRadius: 3,
+          backgroundColor: themeColors.secondary,
         },
       }}
     >
@@ -54,17 +63,10 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerTitle: () => <Header />,
         headerStyle: {
-          backgroundColor: "#011638",
+          backgroundColor: themeColors.primary,
         },
-        headerRight: () => (
-          <Ionicons
-            style={{ marginRight: 10 }}
-            name="home"
-            size={24}
-            color="#BC3908"
-          />
-        ),
       }}
     >
       <Stack.Screen
@@ -80,23 +82,8 @@ const HomeStack = () => {
         component={TopTabs}
       />
       <Stack.Screen
-        name="MovieDetailsScreen"
-        component={MovieDetailsScreen}
-        options={{
-          presentation: "modal",
-        }}
-      />
-      <Stack.Screen
-        name="TVShowDetailsScreen"
-        component={TVShowDetailsScreen}
-        options={{
-          presentation: "modal",
-        }}
-      />
-
-      <Stack.Screen
-        name="SearchResultDetailsScreen"
-        component={SearchResultDetailsScreen}
+        name="ContentDetailsScreen"
+        component={ContentDetailsScreen}
         options={{
           presentation: "modal",
         }}
