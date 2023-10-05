@@ -21,9 +21,11 @@ import Loader from "../src/components/reusable/Loader";
 const MoviesScreen = () => {
   const [selected, setSelected] = useState("");
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // fetch movies by type
   const fetchMoviesByType = async (selectedType) => {
+    setLoading(true);
     let data = [];
 
     switch (selectedType) {
@@ -44,6 +46,7 @@ const MoviesScreen = () => {
     }
 
     setMovies(data?.results);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -59,12 +62,18 @@ const MoviesScreen = () => {
           data={data}
           setSelected={setSelected}
         />
-        <FlatList
-          style={{ marginTop: 20 }}
-          data={movies}
-          keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => <PreviewCard type={"movie"} item={item} />}
-        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <FlatList
+            style={{ marginTop: 20 }}
+            data={movies}
+            keyExtractor={(item) => item?.id}
+            renderItem={({ item }) => (
+              <PreviewCard type={"movie"} item={item} />
+            )}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

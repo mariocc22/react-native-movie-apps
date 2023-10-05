@@ -18,6 +18,9 @@ import SelectComponent from "../src/components/reusable/SelectComponent";
 // data
 import { dataSearch } from "../utils/constants";
 
+// loader
+import Loader from "../src/components/reusable/Loader";
+
 // helpers
 import { searchMovies } from "../utils/helpers";
 import SearchComponent from "../src/components/reusable/SearchComponent";
@@ -29,8 +32,10 @@ const SearchResultScreen = () => {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchSearchResult = async (search, selected) => {
+    setLoading(true);
     let data = [];
     searchMovies(selected, {
       query: search,
@@ -40,7 +45,7 @@ const SearchResultScreen = () => {
     }).then((res) => {
       data = res?.results;
       setSearchResult(data);
-      console.log("this is the search result", data);
+      setLoading(false);
     });
   };
 
@@ -118,17 +123,21 @@ const SearchResultScreen = () => {
       </TouchableOpacity>
 
       {/* search results */}
-      <FlatList
-        style={{ marginTop: 30, paddingHorizontal: 10 }}
-        data={searchResult}
-        keyExtractor={(item) => item?.id}
-        renderItem={({ item }) => (
-          <PreviewCard
-            type={selected === "multi" ? item?.media_type : selected}
-            item={item}
-          />
-        )}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <FlatList
+          style={{ marginTop: 30, paddingHorizontal: 10 }}
+          data={searchResult}
+          keyExtractor={(item) => item?.id}
+          renderItem={({ item }) => (
+            <PreviewCard
+              type={selected === "multi" ? item?.media_type : selected}
+              item={item}
+            />
+          )}
+        />
+      )}
     </SafeAreaView>
   );
 };

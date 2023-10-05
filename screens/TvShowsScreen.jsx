@@ -12,6 +12,9 @@ import {
   fetchTopRatedTvShows,
 } from "../utils/helpers";
 
+// loader
+import Loader from "../src/components/reusable/Loader";
+
 // data for the select list
 import { dataTv } from "../utils/constants";
 import SelectComponent from "../src/components/reusable/SelectComponent";
@@ -20,9 +23,11 @@ import PreviewCard from "../src/components/card/PreviewCard";
 const TVShowsScreen = () => {
   const [selected, setSelected] = useState("");
   const [tvshows, setTvShows] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // fetch movies by type
   const fetchTvShowsByType = async (selectedType) => {
+    setLoading(true);
     let data = [];
 
     switch (selectedType) {
@@ -43,6 +48,7 @@ const TVShowsScreen = () => {
     }
 
     setTvShows(data?.results);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -58,12 +64,16 @@ const TVShowsScreen = () => {
           data={dataTv}
           setSelected={setSelected}
         />
-        <FlatList
-          style={{ marginTop: 20 }}
-          data={tvshows}
-          keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => <PreviewCard type={"tv"} item={item} />}
-        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <FlatList
+            style={{ marginTop: 20 }}
+            data={tvshows}
+            keyExtractor={(item) => item?.id}
+            renderItem={({ item }) => <PreviewCard type={"tv"} item={item} />}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
