@@ -1,3 +1,4 @@
+# Marioflix 🎥 (movie app)
 ### 📜 Table of Contents:
 
 - [👋 About](#about)
@@ -17,15 +18,15 @@
 
 ## Movies/TV Shows 🎥
 
-<img src="./assets/demo/movies.jpeg" alt="Movies Screen" width="300" height="400" />
+<img src="./assets/demo/movies.jpeg" alt="Movies Screen" width="200" height="400" />
 
 ## Search Functionality 🔍
 
-<img src="./assets/demo/search.jpeg" alt="Movies Screen" width="300" height="400" />
+<img src="./assets/demo/search.jpeg" alt="Movies Screen" width="200" height="400" />
 
 ## Movie/TV Show Details 📚
 
-<img src="./assets/demo/movieDetails.jpeg" alt="Movies Screen" width="300" height="400" />
+<img src="./assets/demo/movieDetails.jpeg" alt="Movies Screen" width="200" height="400" />
 
 ---
 
